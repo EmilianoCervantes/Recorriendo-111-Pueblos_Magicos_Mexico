@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-const orgien = '';
+const origen = '';
 const destinos = [];
 const ObtenerJson = (props) => {
     //
@@ -21,14 +21,22 @@ const ObtenerJson = (props) => {
     //Peticion para obtener el json
     //Nota: xml no significa que solo sea para xml
     let xmlHttp = new XMLHttpRequest();
-    let urlPeticion = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+orgien+"&destinations="+urlDestinos+"&key=AIzaSyB2vj6e3SsNUFPhGCEF9dazLKMWLAKYP3c";
+    let urlPeticion = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origen+"&destinations="+urlDestinos+"&key=AIzaSyB2vj6e3SsNUFPhGCEF9dazLKMWLAKYP3c";
+    let respuesta;
     xmlHttp.onreadystatechange = () => {
         if (this.readyState === 4 && this.status === 200) {
-            var myArr = JSON.parse(this.responseText);
+            respuesta = JSON.parse(this.responseText);
         }
-    }
+    };
+    //XMLHttpRequest.open(method, url, async, user, password)
+    xmlHttp.open("GET",urlPeticion,true);
+    xmlHttp.send();
 
-    const respuesta = ;
+    /**
+     * Aqui ya podemos manipular los campos de respuesta
+     */
+    console.log(respuesta);
+
     //Tag pre sirve para mostrar un json
     return (
         <pre className="json">respuesta</pre>

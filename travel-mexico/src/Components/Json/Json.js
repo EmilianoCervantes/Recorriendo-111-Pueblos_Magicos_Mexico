@@ -35,11 +35,11 @@ const ObtenerJson = (props) => {
     /**
      * Aqui ya podemos manipular los campos de respuesta
      */
-    console.log(respuesta);
+    console.log(respuesta.rows[0].elements[0].distance.text);
 
     //Tag pre sirve para mostrar un json
     return (
-        <pre className="json">respuesta</pre>
+        <pre className="json"></pre>
     )
 }
 

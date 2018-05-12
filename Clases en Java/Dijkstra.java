@@ -14,14 +14,14 @@ public class Dijkstra {
 	    nodosNoCalculados.add(fuente);
 	 
 	    while (nodosNoCalculados.size() != 0) {
-	    	Nodo nodoActual = getLowestDistanceNode(nodosNoCalculados);
+	    	Nodo nodoActual = getMenorDistanciaNodo(nodosNoCalculados);
 	    	nodosNoCalculados.remove(nodoActual);
 	        for (Entry < Nodo, Integer> parAdjunto: 
 	        	nodoActual.getNodosCercanos().entrySet()) {
 	        	Nodo nodoAdjunto = parAdjunto.getKey();
 	            Integer pesoArista = parAdjunto.getValue();
 	            if (!nodosCalculados.contains(nodoAdjunto)) {
-	                CalculateMinimumDistance(nodoAdjunto, pesoArista, nodoActual);
+	                CalcularMinimadistancia(nodoAdjunto, pesoArista, nodoActual);
 	                nodosNoCalculados.add(nodoAdjunto);
 	            }
 	        }
@@ -31,7 +31,7 @@ public class Dijkstra {
 	}
 	
 	//Obtener el nodo con la menor distancia del nodo no calculado
-	private static Nodo getLowestDistanceNode(Set < Nodo > nodosNoCalculados) {
+	private static Nodo getMenorDistanciaNodo(Set < Nodo > nodosNoCalculados) {
 		Nodo nodoMenorDistancia = null;
 	    int menorDistancia = Integer.MAX_VALUE;
 	    for (Nodo nodo: nodosNoCalculados) {
@@ -46,7 +46,7 @@ public class Dijkstra {
 	
 	//Compara la distancia actual con la ultima calculada
 	// siguiendo el ultimo camino explorado
-	private static void CalculateMinimumDistance(Nodo nodoEvaluacion, Integer pesoArista, Nodo nodoOrigen) {
+	private static void CalcularMinimadistancia(Nodo nodoEvaluacion, Integer pesoArista, Nodo nodoOrigen) {
 	    Integer distOrigen = nodoOrigen.getDistancia();
 	    if (distOrigen + pesoArista < nodoEvaluacion.getDistancia()) {
 	    	nodoEvaluacion.setDistancia(distOrigen + pesoArista);

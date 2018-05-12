@@ -1,0 +1,8 @@
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/RestapiApplication.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/controller/advice/ProductAdvice.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/repository/ProductRepository.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/dto/MessageDTO.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/service/ProductsService.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/config/SwaggerConfig.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/model/Product.java
+/home/alfredo/eclipse-workspace/swagger-rest-api-documentation-master/src/main/java/com/example/restapi/controller/ProductsController.java

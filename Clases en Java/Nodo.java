@@ -17,7 +17,7 @@ public class Nodo {
      
     Map<Nodo, Integer> nodosCercanos = new HashMap<>();
  
-    public void adddestino(Nodo destino, int distancia) {
+    public void agregarDestino(Nodo destino, int distancia) {
     	nodosCercanos.put(destino, distancia);
     }
     

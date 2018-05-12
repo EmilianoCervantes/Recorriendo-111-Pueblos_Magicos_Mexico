@@ -44,7 +44,7 @@ public class Main {
         List<Nodo> rutaMasCortaParaBCN = Arrays.asList(cdmx, Qro, Hgo);
         List<Nodo> rutaMasCortaParaBCS = Arrays.asList(cdmx, Qro, Hgo);
 
-        boolean prueba = nodo.getDistMasCorta().equals(rutaMasCortaParaQro);
+        boolean prueba = cdmx.getDistMasCorta().equals(rutaMasCortaParaQro);
         System.out.println(prueba);
 
         for (Nodo nodo : Mexico.getNodos()) {

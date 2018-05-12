@@ -14,8 +14,16 @@ public class Main {
         cdmx.agregarDestino(Qro, 10);
         cdmx.agregarDestino(Qroo, 15);
 
-        Qro.agregarDestino(Hgo, 21);
-        Qroo.agregarDestino(Hgo, 15);
+        Qro.agregarDestino(Hgo, 12);
+        Qro.agregarDestino(BCS, 15);
+        
+        Qroo.agregarDestino(BCN, 10);
+        
+        Hgo.agregarDestino(BCN, 2);
+        Hgo.agregarDestino(BCS, 1);
+        
+        BCN.agregarDestino(BCN, 5);
+
         Grafo Mexico = new Grafo();
     
         Mexico.agregaNodo(cdmx);
@@ -29,6 +37,7 @@ public class Main {
         //Despues de calcular, camino mas corto y distancia se pondran para cada nodo en el grafo
         Mexico = Dijkstra.calcularCaminoMasCortoDesdeOrigen(Mexico, cdmx);
 
+        //Estas listas son mas o menos como deberia quedar el camino de la cdmx a los otros 5 lugares
         List<Nodo> rutaMasCortaParaQro = Arrays.asList(cdmx);
         List<Nodo> rutaMasCortaParaQroo = Arrays.asList(cdmx);
         List<Nodo> rutaMasCortaParaHgo = Arrays.asList(cdmx, Qro);

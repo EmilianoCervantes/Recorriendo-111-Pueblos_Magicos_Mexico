@@ -44,12 +44,40 @@ public class Main {
         List<Nodo> rutaMasCortaParaBCN = Arrays.asList(cdmx, Qro, Hgo);
         List<Nodo> rutaMasCortaParaBCS = Arrays.asList(cdmx, Qro, Hgo);
 
-        boolean prueba = cdmx.getDistMasCorta().equals(rutaMasCortaParaQro);
+        //Deberia dar True
+        boolean prueba = BCS.getDistMasCorta().equals(rutaMasCortaParaBCS);
         System.out.println(prueba);
 
         for (Nodo nodo : Mexico.getNodos()) {
             //Nada mas comprueba si es cierto
             //nodo.getDistMasCorta().equals(rutaMasCortaParaQro);
+            switch (node.getName()) {
+                case "Querétaro":
+                    assertTrue(node
+                      .getDistMasCorta()
+                      .equals(shortestPathForNodeQro));
+                    break;
+                    case "Quintana Roo":
+                    assertTrue(node
+                      .getDistMasCorta()
+                      .equals(shortestPathForNodeQroo));
+                    break;
+                case "Hidalgo":
+                    assertTrue(node
+                      .getDistMasCorta()
+                      .equals(shortestPathForNodeHgo));
+                    break;
+                case "Baja California Norte":
+                    assertTrue(node
+                      .getDistMasCorta()
+                      .equals(shortestPathForNodeBCN));
+                    break;
+                case "Baja California Sur":
+                    assertTrue(node
+                      .getDistMasCorta()
+                      .equals(shortestPathForNodeBCS));
+                    break;
+                }
         }
     }
 }

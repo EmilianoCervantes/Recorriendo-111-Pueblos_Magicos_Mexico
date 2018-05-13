@@ -1,0 +1,58 @@
+.App-header {
+  background-image: url('banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center center;
+  width: 100%;
+  height: 300px;
+  color: white;
+  text-align: right;
+}
+
+.layer {
+    background-color: rgba(60, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.App-title {
+  font-size: 6vw;
+  padding: 10px;
+  text-align: left;
+  float: left;
+}
+
+.App-intro {
+  font-size: 20px;
+  padding: 5px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #B61D2A;
+  color: white;
+  text-align: center;
+}
+.select {
+  float: left;
+  margin: 20px;
+}
+button {
+  float: left;
+  margin: 40px;
+  background-color: #26A69A;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}

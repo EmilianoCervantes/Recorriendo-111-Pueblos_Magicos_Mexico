@@ -6,6 +6,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +21,8 @@ public class PuebloEndpoint {
     private PuebloService puebloService;
 
     @Autowired
-    public void setProductsService(PuebloService productsService) {
-        this.puebloService = productsService;
+    public void setPuebloService(PuebloService puebloService) {
+        this.puebloService = puebloService;
     }
 
     @RequestMapping(path = "{id}", method = RequestMethod.GET)
@@ -28,15 +31,24 @@ public class PuebloEndpoint {
     public Pueblo getPueblo(@PathVariable(name = "id") Long id) {
         return puebloService.getPueblo(id);
     }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    @ApiOperation("Ver todos los pueblos del sistema")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
+    public List<Pueblo> getAllPueblos() {
+        return puebloService.getAllPueblos();
+    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Agregar un pueblo")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
     public Pueblo saveProduct(@RequestBody Pueblo productToSave) {
         return puebloService.savePueblo(productToSave);
     }
 
     @RequestMapping(path = "{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Modificar un pueblo")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
     public Pueblo updateProduct(@RequestBody Pueblo productToUpdate, @PathVariable(name = "id") String id) {
         return puebloService.updatePueblo(productToUpdate, id);
     }

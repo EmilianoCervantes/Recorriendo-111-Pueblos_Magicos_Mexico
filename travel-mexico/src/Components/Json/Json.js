@@ -23,9 +23,11 @@ const ObtenerJson = (props) => {
     let xmlHttp = new XMLHttpRequest();
     let urlPeticion = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origen+"&destinations="+urlDestinos+"&key=AIzaSyB2vj6e3SsNUFPhGCEF9dazLKMWLAKYP3c";
     let respuesta;
+    let respuestaParse;
     xmlHttp.onreadystatechange = () => {
         if (this.readyState === 4 && this.status === 200) {
-            respuesta = JSON.parse(this.responseText);
+            respuesta = this.responseText;
+            respuestaParse = JSON.parse(this.responseText);
         }
     };
     //XMLHttpRequest.open(method, url, async, user, password)
@@ -35,11 +37,16 @@ const ObtenerJson = (props) => {
     /**
      * Aqui ya podemos manipular los campos de respuesta
      */
-    console.log(respuesta.rows[0].elements[0].distance.text);
+    console.log(respuesta);         //Esto trae el json entero
+    //Asi se acceden a c/u de los datos
+    console.log(respuestaParse.rows[0].elements[0].distance.text); //Ej: "217 km"
+    console.log(respuestaParse.rows[0].elements[0].distance.value); //Ej: "217361" (esto es en metros)
+    console.log(respuestaParse.rows[0].elements[0].duration.text); //Ej: "2 h 20 min"
+    console.log(respuestaParse.rows[0].elements[0].duration.value); //Ej: "8381" (esto es en segundos)
 
-    //Tag pre sirve para mostrar un json
+    //Tags pre y code sirven para mostrar un json
     return (
-        <pre className="json"></pre>
+        <pre className="json"><code></code></pre>
     )
 }
 

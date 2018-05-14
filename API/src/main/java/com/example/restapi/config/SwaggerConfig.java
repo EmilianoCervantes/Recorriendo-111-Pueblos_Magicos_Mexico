@@ -2,9 +2,11 @@ package com.example.restapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import com.example.restapi.endpoint.AdjuntoEndpoint;
 import com.example.restapi.endpoint.PuebloEndpoint;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -16,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @PropertySource("classpath:swagger.properties")
-@ComponentScan(basePackageClasses = PuebloEndpoint.class)
+@ComponentScan(basePackageClasses = {PuebloEndpoint.class,AdjuntoEndpoint.class})
 @Configuration
 public class SwaggerConfig {
 

@@ -1,8 +1,10 @@
 package com.example.restapi.service;
 
-import com.example.restapi.model.Product;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.PuebloRepository;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ public class PuebloService {
     public Pueblo getPueblo(Long id) {
         LOG.info("Getting the pueblo with given id:" + id);
         return puebloRepository.findOne(id + "");
+    }
+    
+    public List<Pueblo> getAllPueblos(){
+    	LOG.info("Getting all the pueblos in the database");
+    	return puebloRepository.findAll();
     }
 
     public Pueblo savePueblo(Pueblo pueblo) {
@@ -45,7 +52,7 @@ public class PuebloService {
             foundPueblo.setEstado(puebloToUpdate.getEstado());
             return puebloRepository.save(foundPueblo);
         } catch (Exception e) {
-            LOG.error("An error pccurred during update of pueblo" + e.getMessage());
+            LOG.error("An error occurred during update of pueblo" + e.getMessage());
         }
         return puebloToUpdate;
     }

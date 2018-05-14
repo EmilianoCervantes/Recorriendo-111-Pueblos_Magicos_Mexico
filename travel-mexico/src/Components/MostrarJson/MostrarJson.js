@@ -1,5 +1,6 @@
 /**
- * 
+ * Este seria el tipo home
+ * La vista donde pedimos al usuario sus opciones.
  */
 import React, {Component} from 'react';
 import './MostrarJson.css';

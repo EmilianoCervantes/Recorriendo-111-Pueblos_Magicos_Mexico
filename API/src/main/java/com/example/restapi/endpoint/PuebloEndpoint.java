@@ -1,5 +1,6 @@
 package com.example.restapi.endpoint;
 
+import com.example.restapi.classes.Resultado;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.service.PuebloService;
 import io.swagger.annotations.Api;
@@ -43,7 +44,7 @@ public class PuebloEndpoint {
     @RequestMapping(path = "{id}/{id2}", method = RequestMethod.GET)
     @ApiOperation("Ver la mejor ruta entre pueblos")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
-    public LinkedList<Pueblo> getMejorRuta(@PathVariable(name = "id") int id, @PathVariable(name = "id2") int id2) {
+    public Resultado getMejorRuta(@PathVariable(name = "id") int id, @PathVariable(name = "id2") int id2) {
         return puebloService.correrDijkstra(id, id2);
     }
 

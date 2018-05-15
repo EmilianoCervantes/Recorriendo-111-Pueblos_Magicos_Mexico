@@ -2,6 +2,7 @@ package com.example.restapi.service;
 
 import com.example.restapi.classes.AlgoritmoDijkstra;
 import com.example.restapi.classes.Grafo;
+import com.example.restapi.classes.Resultado;
 import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.AdjuntoRepository;
@@ -77,7 +78,7 @@ public class PuebloService {
         }
     }
     
-    public LinkedList<Pueblo> correrDijkstra(int idOrigen, int idDestino) {
+    public Resultado correrDijkstra(int idOrigen, int idDestino) {
     	ArrayList<Pueblo> misPueblos = new ArrayList<Pueblo>(puebloRepository.findAll());
     	ArrayList<Adjunto> misAdjuntos = new ArrayList<Adjunto>(adjuntoRepository.findAll());
     	for(int i = 0; i < misAdjuntos.size(); i++) {
@@ -93,6 +94,9 @@ public class PuebloService {
     	for(Pueblo pueblo: circuito) {
     		System.out.println(pueblo);
     	}
-    	return circuito;
+    	Resultado resultado = new Resultado();
+    	resultado.setCamino(circuito);
+    	resultado.calcularDistanciaAcumulada(adjuntoRepository.findAll());
+    	return resultado;
      }
 }

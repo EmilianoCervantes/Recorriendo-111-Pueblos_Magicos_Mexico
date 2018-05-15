@@ -1,6 +1,8 @@
 package com.example.restapi;
 
+import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
+import com.example.restapi.repository.AdjuntoRepository;
 import com.example.restapi.repository.PuebloRepository;
 
 import java.io.BufferedReader;
@@ -23,10 +25,16 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 public class RestapiApplication implements CommandLineRunner {
 
 	private PuebloRepository puebloRepository;
+	private AdjuntoRepository adjuntoRepository;
 
 	@Autowired
 	public void productRepository(PuebloRepository puebloRepository) {
 		this.puebloRepository = puebloRepository;
+	}
+	
+	@Autowired
+	public void adjuntonRespository(AdjuntoRepository adjuntoRepository) {
+		this.adjuntoRepository = adjuntoRepository;
 	}
 
 	public static void main(String[] args) {
@@ -62,6 +70,31 @@ public class RestapiApplication implements CommandLineRunner {
 				pueblo.setDescripcion("Sin Descripcion");
 				puebloRepository.save(pueblo);
 				//System.out.println(datos[0] + " " + datos[1]);
+				index++;
+			}
+			reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			fileReader = new FileReader("conexiones.csv");
+			reader = new BufferedReader(fileReader);
+			String line = null;
+			int index = 1;
+			while((line = reader.readLine()) != null) {
+				String [] datos = line.split(",");
+				Adjunto adjunto = new Adjunto();
+				adjunto.setId(index + "");
+				adjunto.setPueblo_id_1(datos[0]);
+				adjunto.setPueblo_id_2(datos[1]);
+				adjunto.setDistancia(datos[2]);
+				adjuntoRepository.save(adjunto);				
 				index++;
 			}
 			reader.close();

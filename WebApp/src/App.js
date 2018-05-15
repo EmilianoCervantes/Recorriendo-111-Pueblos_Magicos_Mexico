@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import RouteDetail from './components/RouteDetail.js'
+import RouteDetail from './components/RouteDetail.js';
+import TownCard from './components/TownCard.js';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {origin: "1", destiny: "1", time: 0, distance: 0, route: "abc"};
+    this.state = {origin: "", originName:"", destiny: "", destinyName:"", distance: 0, route:[], towns: []};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOrigin = this.handleOrigin.bind(this);
     this.handleDestiny = this.handleDestiny.bind(this);
   }
 
-  handleSubmit(event) {
-    //axios shit goes here
-    /*
-    
-    axios.get("url").then(res => {
-      this.setState({origin: res.origin, destiny: res.destiny, time: res.time, distance: res.distance, route: res.route});
+  componentWillMount() {
+    axios.get("http://localhost:8080/api/pueblos/").then(res => {
+      this.setState({towns: res.data});
     });
+  }
 
-    */
-
-    alert('Quihubo ' + this.state.origin + this.state.destiny);
+  handleSubmit() {
+    //axios shit goes here
+    axios.get("http://localhost:8080/api/pueblos/"+this.state.origin+"/"+this.state.destiny).then(res => {
+      this.setState({distance: res.data.distanciaAcumulada, route: res.data.camino});
+    });
   }
 
   handleOrigin(event) {
-    this.setState({origin: event.target.value});
+    this.setState({origin: event.target.value, originName: event.target.options[event.target.selectedIndex].text});
   }
 
   handleDestiny(event) {
-    this.setState({destiny: event.target.value});
+    this.setState({destiny: event.target.value, destinyName: event.target.options[event.target.selectedIndex].text});
   }
 
 
@@ -46,25 +47,30 @@ class App extends Component {
           Para encontrar la ruta más rapida entre dos pueblos mágicos, elige los puntos de origen y destino, y depués haz click en "Obtener Ruta".
         </p>
 
-        <form className = "select" onSubmit={this.handleSubmit}>
-          <h2>Pueblo origen</h2>
+        <form className = "select">
+          <h2>Pueblo Origen</h2>
           <select value = {this.state.origin} onChange = {this.handleOrigin}>
-            <option value="1">Pueblo 1</option>
-            <option value="2">Pueblo 2</option>
-            <option value="3">Pueblo 3</option>
+            {this.state.towns.map((town, i) =>
+              <option value={town.id} townname = {town.name} key = {i} >{town.nombre}, {town.estado}</option>
+            )}
           </select>
 
           <h2>Pueblo Destino</h2>
           <select value = {this.state.destiny} onChange = {this.handleDestiny}>
-            <option value="1">Pueblo 1</option>
-            <option value="2">Pueblo 2</option>
-            <option value="3">Pueblo 3</option>
+            {this.state.towns.map((town, i) =>
+              <option value={town.id} key = {i}>{town.nombre}, {town.estado}</option>
+            )}
           </select>
-
-          <input type="submit" value="Obtener ruta"/>
         </form >
+        <button onClick={this.handleSubmit}>Obtener ruta</button>
 
-        <RouteDetail origin = {this.state.origin} destiny = {this.state.destiny} time = {this.state.time} distance = {this.state.distance} route  = {this.state.route}/>
+        <RouteDetail origin = {this.state.originName} destiny = {this.state.destinyName} distance = {this.state.distance}/>
+
+        <div className="routes">
+          {this.state.route.map((town, i) =>
+            <TownCard key = {i} {...town}/>
+          )}
+        </div>
 
         <footer>
         <p>© Proyecto para la clase "Diseño y Arquitectura de Software" del Tec de Monterrey</p>

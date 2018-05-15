@@ -3,6 +3,9 @@ package com.example.restapi.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.google.inject.PrivateBinder;
 
 @Entity
 @Table(name = "Adjunto")
@@ -13,8 +16,25 @@ public class Adjunto {
 	private String pueblo_id_1;
 	private String pueblo_id_2;
 	
+	@Transient
+	private Pueblo origen;
+	@Transient
+	private Pueblo destino;
 	
 	
+	
+	public Pueblo getOrigen() {
+		return origen;
+	}
+	public void setOrigen(Pueblo origen) {
+		this.origen = origen;
+	}
+	public Pueblo getDestino() {
+		return destino;
+	}
+	public void setDestino(Pueblo destino) {
+		this.destino = destino;
+	}
 	public Adjunto() {
 		super();
 	}
@@ -42,6 +62,11 @@ public class Adjunto {
 	public void setPueblo_id_2(String pueblo_id_2) {
 		this.pueblo_id_2 = pueblo_id_2;
 	}
+	
+	@Override
+    public String toString() {
+        return pueblo_id_1 + " --> " + pueblo_id_2;
+    }
 	
 	
 }

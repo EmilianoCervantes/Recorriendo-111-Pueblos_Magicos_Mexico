@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class PuebloEndpoint {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
     public List<Pueblo> getAllPueblos() {
         return puebloService.getAllPueblos();
+    }
+    
+    @RequestMapping(path = "{id}/{id2}", method = RequestMethod.GET)
+    @ApiOperation("Ver la mejor ruta entre pueblos")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Pueblo.class)})
+    public LinkedList<Pueblo> getMejorRuta(@PathVariable(name = "id") int id, @PathVariable(name = "id2") int id2) {
+        return puebloService.correrDijkstra(id, id2);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

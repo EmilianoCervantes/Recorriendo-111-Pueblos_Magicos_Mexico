@@ -1,8 +1,14 @@
 package com.example.restapi.service;
 
+import com.example.restapi.classes.AlgoritmoDijkstra;
+import com.example.restapi.classes.Grafo;
+import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
+import com.example.restapi.repository.AdjuntoRepository;
 import com.example.restapi.repository.PuebloRepository;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,10 +22,16 @@ public class PuebloService {
     private Logger LOG = LoggerFactory.getLogger(PuebloService.class);
 
     private PuebloRepository puebloRepository;
+    private AdjuntoRepository adjuntoRepository;
 
     @Autowired
     public void setPuebloRepository(PuebloRepository puebloRepository) {
         this.puebloRepository = puebloRepository;
+    }
+    
+    @Autowired
+    public void setAdjuntoRepository(AdjuntoRepository adjuntoRepository) {
+        this.adjuntoRepository = adjuntoRepository;
     }
 
     public Pueblo getPueblo(Long id) {
@@ -64,4 +76,23 @@ public class PuebloService {
             LOG.error("An error occurred during deleting of pueblo:" + e.getMessage());
         }
     }
+    
+    public LinkedList<Pueblo> correrDijkstra(int idOrigen, int idDestino) {
+    	ArrayList<Pueblo> misPueblos = new ArrayList<Pueblo>(puebloRepository.findAll());
+    	ArrayList<Adjunto> misAdjuntos = new ArrayList<Adjunto>(adjuntoRepository.findAll());
+    	for(int i = 0; i < misAdjuntos.size(); i++) {
+    		misAdjuntos.get(i).setOrigen(puebloRepository.findOne(misAdjuntos.get(i).getPueblo_id_1()));
+    		misAdjuntos.get(i).setDestino(puebloRepository.findOne(misAdjuntos.get(i).getPueblo_id_2()));
+    	}
+    	Grafo grafo = new Grafo(misPueblos, misAdjuntos);
+    	AlgoritmoDijkstra dijkstra = new AlgoritmoDijkstra(grafo);
+    	dijkstra.iniciar(misPueblos.get(idOrigen-1));
+    	
+    	LinkedList<Pueblo> circuito = dijkstra.obtenerCamino(misPueblos.get(idDestino-1)); //errror
+    	System.out.println(circuito.size());
+    	for(Pueblo pueblo: circuito) {
+    		System.out.println(pueblo);
+    	}
+    	return circuito;
+     }
 }

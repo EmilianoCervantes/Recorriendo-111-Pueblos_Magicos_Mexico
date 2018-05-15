@@ -4,6 +4,7 @@ import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.AdjuntoRepository;
 import com.example.restapi.repository.PuebloRepository;
+import com.example.restapi.service.PuebloService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,12 +21,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.stereotype.Service;
 
 @SpringBootApplication
 public class RestapiApplication implements CommandLineRunner {
 
 	private PuebloRepository puebloRepository;
 	private AdjuntoRepository adjuntoRepository;
+	private PuebloService puebloService;
 
 	@Autowired
 	public void productRepository(PuebloRepository puebloRepository) {
@@ -36,6 +39,12 @@ public class RestapiApplication implements CommandLineRunner {
 	public void adjuntonRespository(AdjuntoRepository adjuntoRepository) {
 		this.adjuntoRepository = adjuntoRepository;
 	}
+	
+	
+	@Autowired
+    public void setPuebloService(PuebloService puebloService) {
+        this.puebloService = puebloService;
+    }
 
 	public static void main(String[] args) {
 		
@@ -105,7 +114,5 @@ public class RestapiApplication implements CommandLineRunner {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 	}
 }

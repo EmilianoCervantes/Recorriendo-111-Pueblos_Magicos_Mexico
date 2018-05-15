@@ -4,16 +4,11 @@ import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.AdjuntoRepository;
 import com.example.restapi.repository.PuebloRepository;
-import com.example.restapi.service.PuebloService;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,7 +23,6 @@ public class RestapiApplication implements CommandLineRunner {
 
 	private PuebloRepository puebloRepository;
 	private AdjuntoRepository adjuntoRepository;
-	private PuebloService puebloService;
 
 	@Autowired
 	public void productRepository(PuebloRepository puebloRepository) {
@@ -39,12 +33,6 @@ public class RestapiApplication implements CommandLineRunner {
 	public void adjuntonRespository(AdjuntoRepository adjuntoRepository) {
 		this.adjuntoRepository = adjuntoRepository;
 	}
-	
-	
-	@Autowired
-    public void setPuebloService(PuebloService puebloService) {
-        this.puebloService = puebloService;
-    }
 
 	public static void main(String[] args) {
 		
@@ -76,6 +64,8 @@ public class RestapiApplication implements CommandLineRunner {
 				pueblo.setId(index + "");
 				pueblo.setNombre(datos[1]);
 				pueblo.setEstado(datos[0]);
+				pueblo.setAno(datos[2]);
+				pueblo.setImagen(datos[3]);
 				pueblo.setDescripcion("Sin Descripcion");
 				puebloRepository.save(pueblo);
 				//System.out.println(datos[0] + " " + datos[1]);

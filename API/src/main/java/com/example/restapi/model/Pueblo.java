@@ -12,8 +12,24 @@ public class Pueblo {
 	private String nombre;
 	private String descripcion;
 	private String estado;
+	private String ano;
+	private String imagen;
 	
 	
+	
+	
+	public String getAno() {
+		return ano;
+	}
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 	public Pueblo() {
 		super();
 	}

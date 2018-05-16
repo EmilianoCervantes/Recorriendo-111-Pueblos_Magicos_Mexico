@@ -67,7 +67,7 @@ public class AlgoritmoDijkstra {
 				vecinos.add(adjunto.getDestino());
 			}
 		}
-		System.out.println("Tengo " + vecinos.size() + " vecinos y soy " + pueblo.getId());
+		//System.out.println("Tengo " + vecinos.size() + " vecinos y soy " + pueblo.getId());
 		return vecinos;
 	}
 	

@@ -1,5 +1,6 @@
 package com.example.restapi;
 
+import com.example.restapi.classes.ConexionMatrixApi;
 import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.AdjuntoRepository;
@@ -67,6 +68,7 @@ public class RestapiApplication implements CommandLineRunner {
 		
 		FileReader fileReader;
 		BufferedReader reader;
+		ConexionMatrixApi matrixApi = new ConexionMatrixApi();
 		try {
 			fileReader = new FileReader("pueblosmagicos.csv");
 			reader = new BufferedReader(fileReader);
@@ -107,7 +109,15 @@ public class RestapiApplication implements CommandLineRunner {
 				adjunto.setPueblo_id_1(datos[0]);
 				adjunto.setPueblo_id_2(datos[1]);
 				adjunto.setDistancia(datos[2]);
-				adjuntoRepository.save(adjunto);				
+				adjuntoRepository.save(adjunto);
+				Pueblo pueblo1 = puebloRepository.findOne(datos[0]);
+				Pueblo pueblo2 = puebloRepository.findOne(datos[1]);
+				String nombre1 = pueblo1.getNombre().replace(' ', '_');
+				String nombre2 = pueblo2.getNombre().replace(' ', '_');
+				float f = matrixApi.searchDistance(nombre1, nombre2);
+				if(f > 0) {
+					adjunto.setDistancia(f+"");
+				}
 				index++;
 			}
 			reader.close();

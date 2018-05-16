@@ -1,9 +1,7 @@
 FROM ubuntu:xenial
 
-MAINTAINER  Author Name <author@email.com>
-
 LABEL "install-type"="mounted"
-EXPOSE 80
+EXPOSE 8005
 
 # Install Node and Ubuntu dependencies
 RUN apt-get update && apt-get install -y -q --no-install-recommends \
@@ -26,8 +24,7 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 
-# Install and run API Server
-WORKDIR /usr/src/app/api
-RUN
+# Install and run node API Server
+WORKDIR /usr/src/app/frontend
 RUN npm install
-CMD ["node", "server.js"]
+CMD ["npm", "start"]

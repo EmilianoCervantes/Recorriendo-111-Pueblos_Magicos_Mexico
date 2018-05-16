@@ -9,15 +9,20 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+//import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.stereotype.Service;
+//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+//import org.springframework.cloud.netflix.feign.EnableFeignClients;
+//import org.springframework.stereotype.Service;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.client.RestTemplate;
 
+//@RestController
 @SpringBootApplication
 public class RestapiApplication implements CommandLineRunner {
 
@@ -33,6 +38,15 @@ public class RestapiApplication implements CommandLineRunner {
 	public void adjuntonRespository(AdjuntoRepository adjuntoRepository) {
 		this.adjuntoRepository = adjuntoRepository;
 	}
+	
+	/*@RequestMapping("/to-read")
+	public String readingList() {
+	    RestTemplate restTemplate = new RestTemplate();
+	    URI uri = URI.create("http://localhost:8090/recommended");
+
+	    return restTemplate.getForObject(uri, String.class);
+	}*/
+
 
 	public static void main(String[] args) {
 		

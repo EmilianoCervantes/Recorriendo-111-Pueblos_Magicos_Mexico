@@ -7,7 +7,9 @@ import com.example.restapi.model.Adjunto;
 import com.example.restapi.model.Pueblo;
 import com.example.restapi.repository.AdjuntoRepository;
 import com.example.restapi.repository.PuebloRepository;
+//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+//import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -99,4 +102,16 @@ public class PuebloService {
     	resultado.calcularDistanciaAcumulada(adjuntoRepository.findAll());
     	return resultado;
      }
+    
+    /*@HystrixCommand(fallbackMethod = "reliable")
+    public Pueblo readingList() {
+      URI uri = URI.create("http://localhost:8090/recommended");
+
+      return this.puebloRepository.findOne(uri.toString());
+    }*/
+    
+    /*
+    public String reliable() {
+        return "Cloud Native Java (O'Reilly)";
+    }*/
 }

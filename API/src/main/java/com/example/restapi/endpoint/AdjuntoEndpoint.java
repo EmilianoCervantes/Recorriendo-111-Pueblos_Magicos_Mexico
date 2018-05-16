@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping(path = "/api/adjuntos/")
 @Api(value = "AdjuntosEndpointAPI", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AdjuntoEndpoint {
+public class AdjuntoEndpoint implements AdjuntoInterface {
 	private AdjuntoService adjuntoService;
 	
 	@Autowired
@@ -29,37 +29,28 @@ public class AdjuntoEndpoint {
 		this.adjuntoService = adjuntoService;
 	}
 	
-	@RequestMapping(path = "{id}", method = RequestMethod.GET)
-    @ApiOperation("Ver un adjunto con un id específico")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Adjunto.class)})
-	public Adjunto getAdjunto(@PathVariable(name = "id") Long id) {
+	@Override
+	public Adjunto getAdjunto(Long id) {
         return adjuntoService.getAdjunto(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-    @ApiOperation("Ver todos los adjuntos del sistema")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Adjunto.class)})
+	@Override
 	public List<Adjunto> getAllAdjuntos() {
         return adjuntoService.getAllAdjuntos();
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation("Agregar un adjunto")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Adjunto.class)})
-	public Adjunto saveAdjunto(@RequestBody Adjunto adjuntoToSave) {
+	@Override
+	public Adjunto saveAdjunto(Adjunto adjuntoToSave) {
 		return adjuntoService.saveAdjunto(adjuntoToSave);
 	}
 	
-	@RequestMapping(path = "{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation("Modificar un adjunto")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Adjunto.class)})
-	public Adjunto updateAdjunto(@RequestBody Adjunto adjuntoToUpdate, @PathVariable(name = "id") String id) {
+	@Override
+	public Adjunto updateAdjunto(Adjunto adjuntoToUpdate, String id) {
 		return adjuntoService.updateAdjunto(adjuntoToUpdate, id);
 	}
 	
-	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
-    @ApiOperation("Borrar un adjunto")
-    public void deleteAdjunto(@PathVariable(name = "id") String id) {
+	@Override
+    public void deleteAdjunto(String id) {
 		adjuntoService.deleteAdjunto(id);
 	}
 	

@@ -116,6 +116,7 @@
 		</plugins>
 	</build>
 
+	<!--
 	<executions>
 		<execution>
 			<id>default</id>
@@ -126,6 +127,6 @@
 			</goals>
 		</execution>
 	</executions>
-
+	-->
 
 </project>
